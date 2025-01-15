@@ -6,9 +6,13 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-public class App extends Application {
+import java.util.Objects;
+
+public class App extends Application
+{
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage)
+    {
         BorderPane root = new BorderPane();
 
         HBox searchBar = new HBox(10);
@@ -21,8 +25,8 @@ public class App extends Application {
 
         searchButton.setOnAction(e -> {
             String query = searchField.getText();
-            if (!query.isEmpty()) {
-                // Suche ausführen (Mock-Daten vorerst)
+            if (!query.isEmpty())
+            {
                 resultsList.getItems().clear();
                 resultsList.getItems().addAll("Film 1", "Film 2", "Serie 1");
             }
@@ -32,12 +36,18 @@ public class App extends Application {
         root.setCenter(resultsList);
 
         Scene scene = new Scene(root, 800, 600);
+
+        scene.getStylesheets().add(
+                Objects.requireNonNull(getClass().getResource("/css/style.css")).toExternalForm()
+        );
+
         primaryStage.setTitle("Film Browser");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         launch();
     }
 }
