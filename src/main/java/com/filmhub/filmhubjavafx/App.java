@@ -1,23 +1,43 @@
 package com.filmhub.filmhubjavafx;
 
-import com.filmhub.filmhubjavafx.controllers.MainController;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
-public class App extends Application
-{
+public class App extends Application {
     @Override
-    public void start(Stage stage) throws IOException
-    {
-        new MainController().start();
+    public void start(Stage primaryStage) {
+        BorderPane root = new BorderPane();
+
+        HBox searchBar = new HBox(10);
+        TextField searchField = new TextField();
+        searchField.setPromptText("Search for a Movie or a Show...");
+        Button searchButton = new Button("Search");
+        searchBar.getChildren().addAll(searchField, searchButton);
+
+        ListView<String> resultsList = new ListView<>();
+
+        searchButton.setOnAction(e -> {
+            String query = searchField.getText();
+            if (!query.isEmpty()) {
+                // Suche ausführen (Mock-Daten vorerst)
+                resultsList.getItems().clear();
+                resultsList.getItems().addAll("Film 1", "Film 2", "Serie 1");
+            }
+        });
+
+        root.setTop(searchBar);
+        root.setCenter(resultsList);
+
+        Scene scene = new Scene(root, 800, 600);
+        primaryStage.setTitle("Film Browser");
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         launch();
     }
 }
