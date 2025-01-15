@@ -137,3 +137,5 @@ Thumbs.db
 *.class
 
 src/main/resources/META-INF
+
+apiKeys.txt
